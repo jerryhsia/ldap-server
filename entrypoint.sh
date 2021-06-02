@@ -43,6 +43,8 @@ else
     echo "data created..."
 fi
 
+date
+
 echo "start samba..."
 
 samba -F
