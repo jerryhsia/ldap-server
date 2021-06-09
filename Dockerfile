@@ -2,8 +2,8 @@ FROM jerry9916/alpine-box:latest
 
 WORKDIR /root
 
-COPY smb.conf install.sh entrypoint.sh /root/
-RUN /root/install.sh
+COPY smb.conf build.sh entrypoint.sh /root/
+RUN /root/build.sh
 
 EXPOSE 389
 

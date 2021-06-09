@@ -29,14 +29,10 @@ init() {
     samba-tool group addmembers test-group-2 euclid,einstein
 }
 
-clean() {
-    touch /root/install.lock
-}
-
-if [ ! -f "/root/install.lock" ];then
+if [ ! -f "/var/run/samba/init.lock" ];then
     echo "create data..."
     init
-    clean
+    touch /var/run/samba/init.lock
 else
     echo "data created..."
 fi
