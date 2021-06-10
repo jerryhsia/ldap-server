@@ -8,3 +8,4 @@ RUN /root/build.sh
 EXPOSE 389
 
 ENTRYPOINT ["/root/entrypoint.sh"]
+

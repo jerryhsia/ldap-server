@@ -3,15 +3,18 @@
 ```
 docker run -d --name ldap-server -p 8389:389 --privileged=true jerry9916/ldap-server:latest
 
-samba-tool user create Tom Passw0rd
+samba-tool user create jack Passw0rd
 ```
 
 ## accounts
 
 ```
-DN：CN=Administrator,CN=Users,DC=ldap,DC=kong,DC=com
+DN：CN=Administrator,CN=Users,DC=test,DC=com
 PASSWORD：Passw0rd
 
-DN：CN=Jerry,CN=Users,DC=ldap,DC=kong,DC=com
+DN：CN=jerry,CN=Users,DC=test,DC=com
+PASSWORD：Passw0rd
+
+DN：CN=tom,CN=Users,DC=test,DC=com
 PASSWORD：Passw0rd
 ```

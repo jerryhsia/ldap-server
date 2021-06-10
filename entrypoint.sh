@@ -3,12 +3,11 @@
 set -e
 
 init() {
-    samba-tool domain provision --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=ldap.kong.com --domain=ldap --adminpass=Passw0rd
+    samba-tool domain provision --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=test.com --domain=ldap --adminpass=Passw0rd
 
-    orgUnits=(mathematicians scientists)
-    for i in "${orgUnits[@]}"
+    for i in $( seq 1 2 )
     do
-        samba-tool ou create "OU=$i"
+        samba-tool ou create "OU=test-ou-$i"
     done
 
     for i in $( seq 1 2 )
@@ -16,17 +15,17 @@ init() {
        samba-tool group add "test-group-$i"
     done
 
-    samba-tool user create euclid --uid euclid --surname euclid --userou OU=mathematicians Passw0rd
-    samba-tool user create einstein --surname einstein --uid einstein --userou OU=scientists Passw0rd
+    samba-tool user create user1 --uid user1 --surname user1 --userou OU=test-ou-1 Passw0rd
+    samba-tool user create user2 --surname user2 --uid user2 --userou OU=test-ou-2 Passw0rd
 
-    users=(Jerry Tom)
+    users=(jerry tom)
     for i in "${users[@]}"
     do
         samba-tool user create $i Passw0rd
     done
 
-    samba-tool group addmembers test-group-1 Jerry,Tom
-    samba-tool group addmembers test-group-2 euclid,einstein
+    samba-tool group addmembers test-group-1 user1,jerry
+    samba-tool group addmembers test-group-2 user2,tom
 }
 
 if [ ! -f "/var/run/samba/init.lock" ];then
